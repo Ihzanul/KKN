@@ -1,0 +1,24 @@
+<h3 style="text-align: center">Daftar Mahasiswa</h3>
+
+<table class="striped">
+     <thead>
+          <tr>
+              <th>NIM</th>
+              <th>Nama</th>
+              <th>Prodi</th>
+              <th>Jenjang</th>
+              <th>Status</th>
+          </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.NIM}}</td>
+            <td>{{this.Nama}}</td>
+            <td>{{this.Prodi}}</td>
+            <td>{{this.Jenjang}}</td>
+            <td>{{this.Status_Mahasiswa}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
