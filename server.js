@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 
-const kknController = require('./controllers/kknControllers');
+const mahasiswaController = require('./controllers/mahasiswaControllers');
 
 var app = express();
 
@@ -16,4 +16,4 @@ app.listen(8080, () => {
     console.log('Express server started at port : 8080');
 });
 
-app.use('/', kknController);
+app.use('/', mahasiswaController);

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/KKNDB', { useNewUrlParser: true }, (err) => {
+mongoose.connect('mongodb://localhost:27017/DataBAK', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (!err) {
         console.log('MongoDB Connection Succesed.')
     }
@@ -9,4 +9,4 @@ mongoose.connect('mongodb://localhost:27017/KKNDB', { useNewUrlParser: true }, (
     }
 });
 
-require('./kkn.model')
+require('./mahasiswa.model')

@@ -1,8 +1,9 @@
-<h3 style="text-align: center">Daftar Mahasiswa</h3>
+<h3>Daftar Mahasiswa</h3>
 
 <table class="striped">
      <thead>
           <tr>
+              <th>No</th>
               <th>NIM</th>
               <th>Nama</th>
               <th>Prodi</th>
@@ -11,13 +12,14 @@
           </tr>
     </thead>
     <tbody>
-        {{#each list}}
+        {{#each daftar}}
         <tr>
-            <td>{{this.NIM}}</td>
-            <td>{{this.Nama}}</td>
-            <td>{{this.Prodi}}</td>
-            <td>{{this.Jenjang}}</td>
-            <td>{{this.Status_Mahasiswa}}</td>
+            <td>{{this.no}}</td>
+            <td>{{this.nim}}</td>
+            <td>{{this.namaMahasiswa}}</td>
+            <td>{{this.prodi}}</td>
+            <td>{{this.jenjang}}</td>
+            <td>{{this.statusMahasiswa}}</td>
         </tr>
         {{/each}}
     </tbody>

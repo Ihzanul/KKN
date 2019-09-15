@@ -1,16 +1,17 @@
 const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-const KKN = mongoose.model('mahasiswa');
+const Mahasiswa = mongoose.model('Mahasiswa');
 
-var kkn = new KKN();
+var Mahasiswas = new Mahasiswa();
 
 router.get('/', (req, res) => {
-    KKN.find((err, docs) => {
+    Mahasiswa.find((err, docs) => {
         if (!err) {
             res.render("kkn/list", {
-                list: docs
+                daftar: docs
             });
+            console.log(docs.length)
         } else {
             console.log('Error in retriving list : ' + err);
         }
