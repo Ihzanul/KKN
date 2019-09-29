@@ -1,42 +1,42 @@
 const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-const MahasiswaModel = mongoose.model('mahasiswa');
-const MailsModel = mongoose.model('mails');
+const DiktiModel = mongoose.model('mahasiswa');
+const BakModel = mongoose.model('mails');
+const DiktiUpdate = mongoose.model('diktiupdates');
 
 router.get('/', (req, res) => {
-    // var Mahasiswa = new MahasiswaModel();
-    // Mahasiswa.No = 1;
-    // Mahasiswa.namaMahasiswa = "Ihznaul"
-    // Mahasiswa.save();
+    // var update = new DiktiUpdate();
+    // update.No = 1;
+    // update.namaMahasiswa = "Ihznaul"
+    // update.save();
 
-    MailsModel.find((err, resbak) => {
+    DiktiModel.find((err, resdikti) => {
         if (!err) {
-                MahasiswaModel.find(null, { '_id': false, 'nim': true}, function(err, resdikti) {
-                    if (err) {
-                        console.log('Error during find mails ' + err);
-                    } else {
-                        for (var i = 0; i < resdikti.length; i++) {
-                            MailsModel.findOne({'nim': resdikti[i].nim}, function(err, rescur) {
-                                if (err) {
-                                    console.log('error during matching ' + err)
-                                } else if (rescur == null){
-                                    console.log(`tidak sama ${i}`)
-                                } else {
-                                    console.log(`stambuk bak ${rescur.nim} sama dengan dikti ${resdikti.nim} pada index ${i}`)
-                                }
-                            })
-                        }
-                    }
-                }).limit(11);
+            const query = {"NIM": ""}
             res.render("kkn/list", {
-                daftar: resbak
+                daftar: resdikti
             });
-            // console.log(docs[1].nim);
+            resdikti.forEach((index, key) => {
+                BakModel.findOne({ 'NIM': index.nim }, (err, resbak) => {
+                    if (resbak !== null) {
+                        // console.log('index ke-'+key+' pada dataDikti ditemukan pada dataBak, status dikti: '+index.statusMahasiswa+' dan status BAK: '+resbak.STATUS)
+                        DiktiUpdate.update({ 'nim': resbak.NIM}, {$set: {'statusMahasiswa': resbak.STATUS, 'noIjazah': resbak.NO_IJAZAH, 'ipk': resbak.IPK}}, (err, resbar) => {
+                            console.log(resbar)
+                        })
+                        // console.log(resbak.IPK)
+                    }
+                    // console.log(resbak)
+                })
+            })
         } else {
             console.log('Error in retriving list : ' + err);
         }
     }).limit(20)
+
+    // DiktiModel.find().limit(20).forEach(function(index ) {
+    //     console.log(index)
+    // })
 });
 
 module.exports = router;
